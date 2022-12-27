@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository// Аннотация @Repository - это специализация аннотации @Component,
@@ -15,6 +16,7 @@ import java.util.List;
 // к шаблону DAO, где классы DAO отвечают за обеспечение операций CRUD над таблицами базы данных.
 public class UserDaoImpl implements UserDAO {
     //указывает на зависимость EntityManager в контейнере
+    @PersistenceContext
     private EntityManager entityManager;// основной интерфуйс ORM служит для управления персистентными сущностями
     //
 
