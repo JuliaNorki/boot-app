@@ -2,16 +2,14 @@ package com.example.bootapp.config.model;
 
 import javax.persistence.*;
 // создание POJO класса
-@Entity //Сущность (entity) - это объект персистентной области. Как правило, сущность
-//представляет таблицу в реляционной базе данных, и каждый экземпляр сущности
-       // соответствует строке в этой таблице.
-//Указывает, что данный бин (класс) является сущностью.
-@Table(name ="users")//указывает на имя таблицы, которая будет отображаться в этой сущности.
+@Entity
+
+@Table(name ="users")
 public class User {
 
-    @Id// уникальный ключ в базе данных
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //указывает, что данное свойство будет создаваться согласно указанной стратегии.
-    @Column(name = "id")//указывает на имя колонки, которая отображается в свойство сущности.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "name")

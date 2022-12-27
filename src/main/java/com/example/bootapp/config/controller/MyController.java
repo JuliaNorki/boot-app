@@ -11,20 +11,19 @@ import org.springframework.web.bind.annotation.*;
     //Spring MVC + CRUD
 
 
-    @Controller //помечает класс контроллером ( в этом классе сможем обрабатывать поступающие от пользователя HTTP запросы.
-    @RequestMapping("/users") //Это одна из основных аннотаций в Spring,
-    // которая сопоставляет HTTP-запросы (URL-адреса) с методами:
+    @Controller
+    @RequestMapping("/users")
     public class MyController {
 
         private final UserService userService;
 
-        @Autowired //внедрение зависимостей
+        @Autowired
         MyController(UserService userService) {
             this.userService = userService;
         }
 
-        @GetMapping() //Аннотация для сопоставления HTTP GET-запросов с конкретными методами обработки.
-        // В частности, @GetMappingэто составная аннотация, которая действует как ярлык для @RequestMapping(method = RequestMethod.GET).
+        @GetMapping()
+
         public String getAllUsers(Model model) {
             model.addAttribute("users", userService.getAllUsers());
             return "index";
@@ -42,9 +41,7 @@ import org.springframework.web.bind.annotation.*;
             return "new";
         }
 
-        @PostMapping() //Аннотация для сопоставления HTTP POST-запросов с конкретными методами обработки.
-        // В частности, @PostMappingэто составная аннотация,
-        // которая действует как ярлык для @RequestMapping(method = RequestMethod.POST).
+        @PostMapping()
         public String create(@ModelAttribute("user") User user) {
             userService.save(user);
             return "redirect:/users";
@@ -57,10 +54,8 @@ import org.springframework.web.bind.annotation.*;
         }
 
         @PatchMapping("/{id}")
-        public String update(@ModelAttribute("user") User user, //С помощью этой аннотации мы можем, что-то извлечь из HTTP запроса.
-                             // Например можно взять с помощью этой аннотации user-a и сохранить в Базу данных
-                             @PathVariable("id") int id) { //@PathVariable можно использовать для обработки переменных шаблона
-            // в сопоставлении URI запроса и установки их в качестве параметров метода.
+        public String update(@ModelAttribute("user") User user,
+                             @PathVariable("id") int id) {
             userService.updateUser(id, user);
             return "redirect:/users";
         }
